@@ -69,7 +69,6 @@ var match = function(round, teamArray1, teamArray2) {
     }
   }
   if round === "round4" {
-    var 
     protected
   }
 }
