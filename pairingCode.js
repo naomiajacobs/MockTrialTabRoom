@@ -30,11 +30,12 @@ var needsD = function(round) {
   });
 }
 
+//add these to separate file of unchanging data? def make into object
 var tiebreakersForRound2 = ["runningBallots", "runningPD", "coinFlip"];
 var tiebreakersForRounds3and4 = ["runningBallots", "runningCS", "runningPD", "coinFlip"];
 var tiebreakersForTrophies = ["runningBallots", "runningCS", "runningOCS", "runningPD", "coinFlip"];
 
-//takes an array of teams and an array of tiebreakers and returns the array sorted by the tiebreakers
+//takes an array of teams and an array of tiebreakers and returns the team array sorted by the tiebreakers
 //issue --> coinflip won't work cause it's supposed to be one coinflip for the whole tournament, and if it's tails, it'll reverse the return values
 //issue --> figure out how to add head to head tie breaker in here; it comes before all the others as long as there are only two teams tied
 //add error message for 0 case
@@ -55,10 +56,11 @@ var sortTeams = function(teamArray, breakerArray) {
 //returns array split into protected and non-protected brackets [[needsP unprotected], [needsD unprotected], [needsP protected], [needsD protected]]
 var protected = function(teamArray1, teamArray2) {}
 
- //resolves impermissible matches and returns reordered list without impermissibles (recursive?)
+//resolves impermissible matches and returns reordered list without impermissibles (recursive?)
 var resolve = function(a, b, round) {}
 
 //checks to see if team match is impermissible (from same school or previous opponent)
+//should team data be structured so that it can check all prior oppoonents more easily?
 var check = function(a, b) {
   if ((a.school === b.school) || ((a.teamNum === b.rounds.round1.oppTeamNum) || ((a.teamNum === b.rounds.round2.oppTeamNum) || (a.teamNum === b.rounds.round3.oppTeamNum)))) {
     return false;
@@ -84,6 +86,7 @@ var match = function(round, teamArray1, teamArray2) {
   }
   //writing the rules for resolving impermissible matches between the two brackets is gonna be a shitshow for round 4
   if round === "round4" {
+    //need to complete this
     protected
   }
 }
