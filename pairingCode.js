@@ -1,4 +1,5 @@
 //logic and pairings that don't depend on user input
+//needs to incorporate bye-buster rules
 
 //returns new array of all teams that need to be plaintiff for next round (2 or 4)
 var needsP = function(round) {
