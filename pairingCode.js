@@ -29,6 +29,7 @@ var tiebreakersForTrophies = ["runningBallots", "runningCS", "runningOCS", "runn
 
 //for each round's different tiebreakers, returns array of teams reordered by rank to prep for pairings
 //issue --> coinflip won't work cause it's supposed to be one coinflip for the whole tournament, and if it's tails, it'll reverse the return values
+//issue --> figure out how to add head to head tie breaker in here; it comes before all the others as long as there are only two teams tied
 var sortTeams = function(teamArray, breakerArray) {
   return teamArray.sort(function(a, b) {
     var continue = true; //allows for loop to break
@@ -68,6 +69,7 @@ var match = function(round, teamArray1, teamArray2) {
       }
     }
   }
+  //for round 3, teams are sorted without respect to side - find better way of resolving this? might depend on how hard the resolve function is
   if round === "round3" {
     for (var i = 0; i < teamArray1.length; i = i + 2) {
       if (!(check(teamArray1[i], teamArray1[i+1]))) {
@@ -75,6 +77,7 @@ var match = function(round, teamArray1, teamArray2) {
       }
     }
   }
+  //writing the rules for resolving impermissible matches between the two brackets is gonna be a shitshow for round 4
   if round === "round4" {
     protected
   }
