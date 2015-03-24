@@ -21,11 +21,81 @@ var needsD = function(round) {
   });
 }
 
+var tiebreakersForRound2 = ["runningBallots", "runningPD", "coinFlip"];
+var tiebreakersForRounds3and4 = ["runningBallots", "runningCS", "runningPD", "coinFlip"];
+var tiebreakersForTrophies = ["runningBallots", "runningCS", "runningOCS", "runningPD", "coinFlip"];
+
+
+var sortTeams = function(teamArray, breakerArray) {
+  return teamArray.sort(function(a, b) {
+    var continue = true; //allows for loop to break
+    for (var i = 0; (i < breakerArray.length) && (continue); i++) {
+      var x = a[breakerArray[i]];
+      var y = b[breakerArray[i]];
+      if (x < y) {
+        continue = false;
+        return -1;
+      } else if (x > y) {
+        continue = false;
+        return 1;
+      } else {return 0}
+    }
+  });
+}
+
+//returns array split into protected and non-protected brackets [[needsP unprotected], [needsD unprotected], [needsP protected], [needsD protected]]
+var protected = function(teamArray1, teamArray2) {}
+
+ //reorders list (recursive?)
+var resolve = function(a, b, round) {}
+
+//checks to see if team match is impermissible
+var check = function(a, b) {
+  if (a.school === b.school) || ((a.teamNum === b.rounds.round1.oppTeamNum) || ((a.teamNum === b.rounds.round2.oppTeamNum) || (a.teamNum === b.rounds.round3.oppTeamNum))) {
+    return false;
+  } else {return true;}
+}
+
+var match = function(round, teamArray1, teamArray2) {
+  if round === "round2" {
+    for (var i = 0; i < teamArray1.length; i++) {
+      if (!(check(teamArray1[i], teamArray2[i]))) {
+        return resolve(teamArray1[i], teamArray2[i], round);
+      }
+    }
+  }
+  if round === "round3" {
+    for (var i = 0; i < teamArray1.length; i = i + 2) {
+      if (!(check(teamArray1[i], teamArray1[i+1]))) {
+        return resolve(teamArray1[i], teamArray1[i+1], round);
+      }
+    }
+  }
+  if round === "round4" {
+    var 
+    protected
+  }
+}
+
+
+
 //example team object
 var teams = [
   {"1091":
     {"school": "UChicago"},
     {"teamNum": "1091"},
+    {"roster":
+      {"member1": "naomiJacobs"},
+      {"member2": "reedMolbak"},
+      {"member3": "thomasChapman"},
+      {"member4": "alyssaMallory"},
+      {"member5": "maryiamSaifuddin"},
+      {"member6": "griffinBrunk"},
+      {"member7": "dexterOConnell"},
+      {"member8": "michaelHelger"},
+      {"member9": "meganKoehnen"},
+      {"member10": "emilyShaw"}
+    }
     {"runningBallots": 0},
     {"runningCS": 0},
     {"runningOCS": 0},
@@ -39,12 +109,13 @@ var teams = [
           {"awards":
             {"atty":
               {"naomiJacobs": 3},
-              {"reedMolbak": 4},
+              {"alyssaMallory": 4},
               {"thomasChapman": 5}
             },
             {"witness":
               {"maryiamSaifuddin": 5},
-              {"griffinBrunk": 4}
+              {"griffinBrunk": 4},
+              {"reedMolbak": 3}
             }
           }
         },
@@ -58,7 +129,8 @@ var teams = [
             },
             {"witness":
               {"maryiamSaifuddin": 5},
-              {"griffinBrunk": 4}
+              {"griffinBrunk": 4},
+              {"reedMolbak": 3}
             }
           }
         }
@@ -80,67 +152,8 @@ var teams = [
       {"round2": {}},
       {"round3": {}},
       {"round4": {}}
-    },
-    {"awards":
-      {"naomiJacobs":
-        {"atty":
-          {"round1":
-            {"judge1": 5},
-            {"judge2": 4},
-            {"judge3": 4},
-            {"side": "p"}
-          },
-          {"round2":
-            {"judge1": 0},
-            {"judge2": 0},
-            {"judge3": 0},
-            {"side": "d"}
-          },
-          {"round3":
-            {"judge1": 0},
-            {"judge2": 0},
-            {"judge3": 0},
-            {"side": "p"}
-          },
-          {"round4":
-            {"judge1": 0},
-            {"judge2": 0},
-            {"judge3": 0},
-            {"side": "d"}
-          }
-        },
-        {"witness":
-          {"round1":
-            {"judge1": 5},
-            {"judge2": 4},
-            {"judge3": 4},
-            {"side": "p"}
-          },
-          {"round2":
-            {"judge1": 0},
-            {"judge2": 0},
-            {"judge3": 0},
-            {"side": "d"}
-          },
-          {"round3":
-            {"judge1": 0},
-            {"judge2": 0},
-            {"judge3": 0},
-            {"side": "p"}
-          },
-          {"round4":
-            {"judge1": 0},
-            {"judge2": 0},
-            {"judge3": 0},
-            {"side": "d"}
-          }
-        }
-      },
-      {"reedMolbak": {}},
-      {"thomasChapman": {}},
-      {"maryiamSaifuddin": {}},
-      {"griffinBrunk": {}},
-      {"alyssaMallory": {}},
     }
-  }
-];
+  },
+  {"1092"},
+  {"1093"},
+  {"1094"}];
