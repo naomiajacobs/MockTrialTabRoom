@@ -28,6 +28,7 @@ var tiebreakersForRounds3and4 = ["runningBallots", "runningCS", "runningPD", "co
 var tiebreakersForTrophies = ["runningBallots", "runningCS", "runningOCS", "runningPD", "coinFlip"];
 
 //for each round's different tiebreakers, returns array of teams reordered by rank to prep for pairings
+//issue --> coinflip won't work cause it's supposed to be one coinflip for the whole tournament, and if it's tails, it'll reverse the return values
 var sortTeams = function(teamArray, breakerArray) {
   return teamArray.sort(function(a, b) {
     var continue = true; //allows for loop to break
