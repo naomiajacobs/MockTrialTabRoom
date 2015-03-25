@@ -2,7 +2,7 @@
 //needs to incorporate bye-buster rules
 
 //returns new array of all teams that need to be plaintiff for next round (2 or 4)
-//teams taken from teamData.js file
+//teams taken from tournData.js file
 var needsP = function(round) {
   return teams.filter(function(team) {
     if (round === "round2") {
@@ -17,7 +17,7 @@ var needsP = function(round) {
 
 
 //returns new array of all teams that need to be defense for next round (2 or 4)
-//teams taken from teamData.js file
+//teams taken from tournData.js file
 var needsD = function(round) {
   return teams.filter(function(team) {
     if (round === "round2") {
@@ -30,12 +30,8 @@ var needsD = function(round) {
   });
 }
 
-//add these to separate file of unchanging data? def make into object
-var tiebreakersForRound2 = ["runningBallots", "runningPD", "coinFlip"];
-var tiebreakersForRounds3and4 = ["runningBallots", "runningCS", "runningPD", "coinFlip"];
-var tiebreakersForTrophies = ["runningBallots", "runningCS", "runningOCS", "runningPD", "coinFlip"];
-
 //takes an array of teams and an array of tiebreakers and returns the team array sorted by the tiebreakers
+//tiebreaker array comes from tiebreakers object in tournData file
 //issue --> coinflip won't work cause it's supposed to be one coinflip for the whole tournament, and if it's tails, it'll reverse the return values
 //issue --> figure out how to add head to head tie breaker in here; it comes before all the others as long as there are only two teams tied
 //add error message for 0 case
@@ -57,26 +53,41 @@ var sortTeams = function(teamArray, breakerArray) {
 var protected = function(teamArray1, teamArray2) {}
 
 //resolves impermissible matches and returns reordered list without impermissibles (recursive?)
-var resolve = function(a, b, round) {}
+//takes team objects from teams array (in other file), returns ??? reordered array???
+//has to include a way to add swapped teams to temporary impermissibles list
+var resolveImpermissible = function(a, b, breakers) { }
+}
 
-//checks to see if team match is impermissible (from same school or previous opponent)
-//should team data be structured so that it can check all prior oppoonents more easily?
-var check = function(a, b) {
-  if ((a.school === b.school) || ((a.teamNum === b.rounds.round1.oppTeamNum) || ((a.teamNum === b.rounds.round2.oppTeamNum) || (a.teamNum === b.rounds.round3.oppTeamNum)))) {
-    return false;
-  } else {return true;}
+//checks to see if team match is impermissible (from same school or previous opponent), returns true if the match is ok
+var checkMatch = function(a, b) {
+  a.impermissibles.indexOf(b.teamNum) === -1) ? false : true;
 }
 
 //returns array of matched teams with all impermissibles resolved
 var match = function(round, teamArray1, teamArray2) {
   if round === "round2" {
     for (var i = 0; i < teamArray1.length; i++) {
-      if (!(check(teamArray1[i], teamArray2[i]))) {
-        return resolve(teamArray1[i], teamArray2[i], round);
+      if (!(checkMatch(teamArray1[i], teamArray2[i]))) {
+        return function resolveImpermissible(teamArray1[i], teamArray2[i], tiebreakers.round2) {
+          //add thing to check if first or last match first
+          //create array to temporarily hold results of tiebreakers
+          var differences = [];
+          //push differences in ballots to find smallest difference
+          for (var j = 0; j < tiebreakers.round2.length; j++) {
+            var breaker = tiebreakers.round2[j];
+            var option1 = Math.abs(teamArray1[i].breaker - teamArray1[i-1].breaker);
+            var option2 = Math.abs(teamArray1[i].breaker - teamArray1[i+1].breaker);
+            var option3 = Math.abs(teamArray2[i].breaker - teamArray2[i-1].breaker);
+            var option4 = Math.abs(teamArray2[i].breaker - teamArray2[i+1].breaker);
+            differences.push(option1, option2, option3, option4);
+            differences.sort(); //
+          }
+        }
       }
     }
   }
   //for round 3, teams are sorted without respect to side - find better way of resolving this? might depend on how hard the resolve function is
+  //must include the coin flip to determine sides (heads --> odd ranks are p, tails --> even ranks are p)
   if round === "round3" {
     for (var i = 0; i < teamArray1.length; i = i + 2) {
       if (!(check(teamArray1[i], teamArray1[i+1]))) {
