@@ -2,7 +2,7 @@
 //needs to incorporate bye-buster rules
 
 //returns new array of all teams that need to be plaintiff for next round (2 or 4)
-//teams taken from teamdata file
+//teams taken from teamData.js file
 var needsP = function(round) {
   return teams.filter(function(team) {
     if (round === "round2") {
@@ -17,7 +17,7 @@ var needsP = function(round) {
 
 
 //returns new array of all teams that need to be defense for next round (2 or 4)
-//teams taken from teamdata file
+//teams taken from teamData.js file
 var needsD = function(round) {
   return teams.filter(function(team) {
     if (round === "round2") {
