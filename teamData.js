@@ -1,24 +1,25 @@
 //example team object
 var teams = [
   {"1037":
-    {"school": "Coastal Carolina U"},
-    {"teamNum": 1037},
-    {"runningBallots": 0},
-    {"runningCS": 2},
-    {"runningOCS": 0},
-    {"runningPD": -35},
+    "school": "Coastal Carolina U",
+    "teamNum": 1037,
+    "runningBallots": 0,
+    "runningCS": 2,
+    "runningOCS": 0,
+    "runningPD": -35,
+    "impermissibles": [xxxx, xxxx, xxxx, xxxx],
     {"rounds":
       {"round1":
-        {"oppTeamNum": 1139},
-        {"side": "d"},
-        {"judge1": -29},
-        {"judge2": -14}
+        "oppTeamNum": 1139,
+        "side": "d",
+        "judge1": -29,
+        "judge2": -14
       },
       {"round2":
-        {"oppTeamNum": },
-        {"side": },
-        {"judge1": },
-        {"judge2": } 
+        "oppTeamNum": ,
+        "side": ,
+        "judge1": ,
+        "judge2":  
       },
       {"round3": 
         {"oppTeamNum": },
@@ -27,10 +28,10 @@ var teams = [
         {"judge2":}
       },
       {"round4":
-        {"oppTeamNum": },
-        {"side": },
-        {"judge1": },
-        {"judge2": }
+        "oppTeamNum": ,
+        "side": ,
+        "judge1": ,
+        "judge2": 
       }
     }
   },
