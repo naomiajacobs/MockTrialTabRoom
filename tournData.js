@@ -1,9 +1,9 @@
 //tiebreaker orders
 var tiebreakers = {
-  "round2": ["runningBallots", "runningPD"];
-  "rounds3and4": ["runningBallots", "runningCS", "runningPD"];
-  "trophies": ["runningBallots", "runningCS", "runningOCS", "runningPD"];
-}
+  "round2": ["runningBallots", "runningPD"],
+  "rounds3and4": ["runningBallots", "runningCS", "runningPD"],
+  "trophies": ["runningBallots", "runningCS", "runningOCS", "runningPD"],
+};
 
 //example team object
 var teams = [
